@@ -1,12 +1,13 @@
 <?php
 
-function addressbook_add(&$form, &$form_state, $contact_id = FALSE) {
+function addressbook_add($form, &$form_state, $contact_id = FALSE) {
 
 //  $db_select =  db_select('adressbook_table', 'n')
 //    ->fields('n')
-//    ->condition('n.addressbook_id', arg(3))
+//    //->condition('n.addressbook_id', arg(3))
 //    ->execute()
 //    ->fetchAll();
+//
 
   $form['addressbook_firstname'] = array(
     '#type' => 'textfield',
@@ -68,7 +69,7 @@ function addressbook_add_validate(&$form, &$form_state) {
 }
 
 function addressbook_add_submit(&$form, &$form_state) {
-  dsm($form);
+  //dsm($form);
   return db_insert('adressbook_table')
     ->fields(array(
       'addressbook_name' => $form['addressbook_firstname']['#value'],

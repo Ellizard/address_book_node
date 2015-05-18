@@ -34,17 +34,18 @@ function addressbook_menu() {
     'page arguments' => array('addressbook_add', 3),
     'access arguments' => array('administer site configuration'),
   );
-//
-//  /*
-//   * Delete page
-//   */
-//  $items['admin/content/contacts/*/delete'] = array(
-//    'title' => 'Delete existing contact',
-//    'description' => 'You can Delete existing contact',
-//    'page callback' => 'addressbook_delete',
-//    'page arguments' => array(3),
-//    'access arguments' => array('administer site configuration'),
-//  );
+
+  /*
+   * Delete page
+   */
+  $items['admin/content/contacts/%addressbook_id/delete'] = array(
+    'title' => 'Delete existing contact',
+    'description' => 'You can Delete existing contact',
+    'page callback' => 'addressbook_delete',
+    'page arguments' => array(3),
+    'access arguments' => array('administer site configuration'),
+    'file' => 'includes/addressbook.delete.inc'
+  );
 //
 //  /*
 //   * View page
@@ -64,11 +65,13 @@ function addressbook_menu() {
 
 
 function addressbook_id_load($contact_id) {
-  return db_select('adressbook_table', 'n')
+  $query =  db_select('adressbook_table', 'n')
     ->fields('n')
     ->condition('n.addressbook_id', $contact_id)
     ->execute()
     ->fetchObject();
+
+  return $query->addressbook_id;
 }
 
 
