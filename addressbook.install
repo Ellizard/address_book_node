@@ -1,0 +1,49 @@
+<?php
+
+function addressbook_schema() {
+  $schema['adressbook_table'] = array(
+    'description' => 'Table for Address Book module',
+    'fields' => array(
+      'addressbook_id' => array(
+        'description' => 'Main identificator',
+        'type' => 'serial',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ),
+      'addressbook_name' => array(
+        'description' => 'Field for name',
+        'type' => 'varchar',
+        'length' => '150',
+        'default' => 0,
+      ),
+      'addressbook_lastname' => array(
+        'description' => 'Field for Last name',
+        'type' => 'varchar',
+        'length' => '150',
+        'default' => 0,
+      ),
+      'addressbook_email' => array(
+        'description' => 'Field for name',
+        'type' => 'varchar',
+        'length' => '150',
+        'default' => 0,
+      ),
+      'addressbook_photo' => array(
+        'description' => 'Field for name',
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'addressbook_phone' => array(
+        'description' => 'Field for name',
+        'type' => 'int',
+        'length' => '150',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+    ),
+    'primary key' => array('addressbook_id'),
+  );
+  return $schema;
+}

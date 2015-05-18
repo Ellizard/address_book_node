@@ -1,0 +1,107 @@
+<?php
+
+function addressbook_menu() {
+  $items = array();
+
+  /*
+   * Add page
+   */
+  $items['admin/content/contacts/add'] = array(
+    'title' => 'Add contact to adress book',
+    'description' => 'Add contact to adress bok with "Adress book" module',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('addressbook_add'),
+    'access arguments' => array('administer site configuration'),
+    'file' => 'includes/addressbook.add.inc',
+  );
+
+  $items['admin/content/contacts'] = array(
+    'title' => 'List of contacts',
+    'description' => 'List of all contact',
+    'page callback' => 'addressbook_contacts',
+    'access arguments' => array('administer site configuration'),
+    'file' => 'includes/addressbook.contacts.inc',
+    'type' => MENU_LOCAL_TASK,
+  );
+
+  /*
+   * Edit page
+   */
+  $items['admin/content/contacts/%addressbook_id/edit'] = array(
+    'title' => 'Edit existing contact',
+    'description' => 'You can edit existing contact',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('addressbook_add', 3),
+    'access arguments' => array('administer site configuration'),
+  );
+//
+//  /*
+//   * Delete page
+//   */
+//  $items['admin/content/contacts/*/delete'] = array(
+//    'title' => 'Delete existing contact',
+//    'description' => 'You can Delete existing contact',
+//    'page callback' => 'addressbook_delete',
+//    'page arguments' => array(3),
+//    'access arguments' => array('administer site configuration'),
+//  );
+//
+//  /*
+//   * View page
+//   */
+//  $items['admin/content/contacts/*/view'] = array(
+//    'title' => 'View all contact post',
+//    'description' => 'View all contact post on this page',
+//    'page callback' => 'addressbook_view',
+//    'page arguments' => array(3),
+//    'access arguments' => array('administer site configuration'),
+//  );
+
+  return $items;
+}
+
+
+
+
+function addressbook_id_load($contact_id) {
+  return db_select('adressbook_table', 'n')
+    ->fields('n')
+    ->condition('n.addressbook_id', $contact_id)
+    ->execute()
+    ->fetchObject();
+}
+
+
+
+
+
+
+
+//function addressbook_permission() {
+//  return array(
+//    'administer site configuration'        => array(
+//      'title'       => t('Add contacts'),
+//      'description' => t('Add new contacts to address book'),
+//    ),
+////    'edit contact from address book'      => array(
+////      'title'       => t('Edit contacts'),
+////      'description' => t('Edit contacts from address book.'),
+////    ),
+////    'remove contact from address book'    => array(
+////      'title'       => t('Remove contacts'),
+////      'description' => t('Remove contacts from address book.'),
+////    ),
+////    'view contact of address book'        => array(
+////      'title'       => t('View contacts'),
+////      'description' => t('View contacts of address book.'),
+////    ),
+////    'delete contact of address book'        => array(
+////      'title'       => t('Delete contacts'),
+////      'description' => t('Delete contacts of address book.'),
+////    ),
+////    'administer contacts of address book' => array(
+////      'title'       => t('Administrate contacts'),
+////      'description' => t('View admin page of contacts.'),
+////    ),
+//  );
+//}
